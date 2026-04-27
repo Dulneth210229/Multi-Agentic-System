@@ -1,27 +1,11 @@
-from langchain_ollama import ChatOllama
+from langchain_ollama import ChatOllama # type: ignore
 from langchain_core.messages import HumanMessage, SystemMessage
+from .prompt import planner_prompt
 
 llm = ChatOllama(model="qwen3-coder", temperature=0.5)
 
 def planner_agent(state):
-        prompt = f"""
-You are a senior software project planner.
-
-User request:
-{state["user_prompt"]}
-
-Create a clear software development plan.
-
-Include:
-1. Project goal
-2. Main features
-3. Technologies
-4. Pages/components needed
-5. Development steps
-6. Testing expectations
-
-Return only the plan.
-"""
+        prompt = planner_prompt(state["user_prompt"])
         response = llm.invoke([HumanMessage(content = prompt)])
 
         return {
