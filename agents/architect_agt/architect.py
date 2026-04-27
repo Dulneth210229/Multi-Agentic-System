@@ -5,7 +5,7 @@ from .prompt import architect_prompt
 llm = ChatOllama(model="llama3", temperature=0.5)
 
 def architect_agent(state):
-    prompt = architect_prompt(state["user_prompt"]["plan"])
+    prompt = architect_prompt(state)
     response = llm.invoke([HumanMessage(content = prompt)])
 
     return {
