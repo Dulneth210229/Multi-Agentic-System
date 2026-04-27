@@ -1,6 +1,6 @@
-from langchain_ollama import ChatOllama
+from langchain_ollama import ChatOllama # type: ignore
 from langchain_core.messages import HumanMessage, SystemMessage
-from prompt import planner_prompt
+from .prompt import planner_prompt
 
 llm = ChatOllama(model="qwen3-coder", temperature=0.5)
 
