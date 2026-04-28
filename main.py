@@ -3,6 +3,7 @@ from langgraph.graph import StateGraph, END
 from state import MASState
 from agents.planner_agt.planner import planner_agent
 from agents.architect_agt.architect import architect_agent
+from agents.security_agt.security import security_agent
 
 def build_graph():
     graph = StateGraph(MASState)
@@ -10,12 +11,15 @@ def build_graph():
     #initialize the node
     graph.add_node("planner", planner_agent)
     graph.add_node("architect", architect_agent)
+    graph.add_node("security", security_agent)
 
     #set the entry point for the graph
     graph.set_entry_point("planner")
 
     #add edges between the nodes
     graph.add_edge("planner", "architect")
+    graph.add_edge("architect", "security")
+    graph.add_edge("security", END)
 
     return graph.compile()
 
